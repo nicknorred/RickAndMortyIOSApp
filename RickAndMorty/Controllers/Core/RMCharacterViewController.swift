@@ -15,6 +15,7 @@ final class RMCharacterViewController: UIViewController {
         view.backgroundColor = .systemBackground
         title = "Characters"
         
+        ///defining your request, endpoint = RMEndpoint (.character, episode, location)
         let request = RMRequest(
             endpoint: .character,
             queryParameters: [

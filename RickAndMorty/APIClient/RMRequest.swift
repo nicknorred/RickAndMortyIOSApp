@@ -10,16 +10,17 @@ import Foundation
 
 /// Object that represents single API call
 final class RMRequest{
-    /// API Constants
+    /// API Constants - we're taking this base url and adding onto using for loops
     private struct Constants{
         static let baseUrl = "https://rickandmortyapi.com/api"
-        
     }
     
     /// Desired endpoint
+    /// This equals our RMEndpoint object {case character, location, episode}
     private let endpoint: RMEndpoint
     
     /// Path components for API, if any
+    /// Set is used to store distinct values unordered, good when items need to appear only once or order isn't important
     private let pathComponents: Set<String>
     
     /// Query argyments for API, if any
@@ -37,6 +38,7 @@ final class RMRequest{
         if !pathComponents.isEmpty {
             pathComponents.forEach({
                 string += "/\($0)"
+             
             })
         }
         if !queryParameters.isEmpty {
@@ -46,7 +48,6 @@ final class RMRequest{
                 guard let value = $0.value else { return nil } 
                 return "\($0.name)=\(value)"
             }).joined(separator: "&")
-            
             string += argumentString
         }
         
